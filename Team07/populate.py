@@ -11,9 +11,10 @@ from guitar.models import Guitar, GuitarsWithSong
 
 def populate():
     guitar_response = requests.get("https://services.guitarguitar.co.uk/WebService/api/hackathon/guitars")
+    guitars = guitar_response.json()
     #songs_response = requests.get("https://services.guitarguitar.co.uk/WebService/api/hackathon/guitarswithsongs")
-    
-    for guitar in guitar_response.json():
+
+    for guitar in guitars:
         g = Guitar.objects.get_or_create(skU_ID = guitar["skU_ID"])[0]
         #for key,value in guitar.Items():
         g.asn = guitar["asn"]
@@ -31,7 +32,7 @@ def populate():
         g.colour = guitar["colour"]
         g.pickup = guitar["pickup"]
         g.bodyShape = guitar["bodyShape"]
-        g.createOn = guitar["createOn"]
+        g.createdOn = guitar["createdOn"]
         g.imageUrls = guitar["imageUrls"]
         g.save()
 

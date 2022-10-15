@@ -1,5 +1,5 @@
-from enum import unique
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
 
@@ -27,14 +27,14 @@ class Guitar(models.Model):
     description = models.CharField(default = "", max_length = 256)
     productDetail = models.CharField(max_length = 512)
     salesPrice = models.FloatField(),
-    pictureMain = models.URLField(unique=True)
+    pictureMain = models.URLField()
     qtyInStock = models.IntegerField(default = 0)
     qtyOnOrder = models.IntegerField(default = 0)
     colour = models.IntegerField(default = 0)
     pickup = models.IntegerField(default = 0)
     bodyShape = models.IntegerField(default = 0)
-    createOn = models.DateTimeField()
-    imageUrls = models.URLField(unique=True)
+    createdOn = models.DateTimeField(null=True)
+    imageUrls = models.URLField(null=True)
 
     def __str__(self):
         return self.name
