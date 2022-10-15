@@ -26,7 +26,7 @@ class Guitar(models.Model):
     brandName = models.CharField(max_length = 64)
     description = models.CharField(default = "", max_length = 256)
     productDetail = models.CharField(max_length = 512)
-    salesPrice = models.FloatField(),
+    salesPrice = models.FloatField(null=True)
     pictureMain = models.URLField()
     qtyInStock = models.IntegerField(default = 0)
     qtyOnOrder = models.IntegerField(default = 0)
