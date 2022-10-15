@@ -1,12 +1,29 @@
 <!DOCTYPE html>
+{% extends 'guitar/base.html' %}
+{% load static %}
 <html>
 
-    <head>
-        <title>🎸GuitarGuitar🎸</title>
-    </head>
+    {% block header_block %}
+        <h1 id="header">Welcome to 🎸GuitarGuitar🎸</h1>
+    {% endblock %}
 
-    <body>
-        <h1>Welcome to 🎸GuitarGuitar🎸</h1>
-    </body>
+    {% block body_block %}
+
+    <div id="Container">
+        <h2>Guitars of the day!!</h2>
+        <div id="carousel"> 
+            {% if guitars %}
+                {% for guitar in guitars %}
+                    <div id="carousel-item"> 
+                        <p>{{ guitar.title }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <strong>There are no guitars present</strong>
+            {% endif %}
+        </div>
+
+
+    {% endblock %}
 
 </html>

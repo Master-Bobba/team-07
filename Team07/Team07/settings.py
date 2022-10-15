@@ -15,10 +15,8 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 SETTINGS_DIR = os.path.dirname(__file__)
-TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
-TEMPLATE_DIRS = (
-    "C:/Users/gemme/Desktop/University/Hackathon22/team-07/Team07/Templates",
-)
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'Templates')
+STATIC_DIR = os.path.join(BASE_DIR, 'static')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -115,6 +113,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = "static/"
+STATICFILES_DIRS = [STATIC_DIR, ]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
