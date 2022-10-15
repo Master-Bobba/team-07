@@ -1,20 +1,15 @@
-from http.client import HTTPResponse
-import re
-from urllib import response
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from django.http import JsonResponse
 import requests
 from .models import SpotifyToken, Guitar
 from django.template import RequestContext
-import random
 
 from .credentials import CLIENT_ID, CLIENT_SECRET, REDIRECT_URI
 from rest_framework.views import APIView
 from requests import Request, post
 from rest_framework import status
 from rest_framework.response import Response
-from .util import is_spotify_authenticated, update_or_create_user_tokens, is_spotify_authenticated
+from .util import update_or_create_user_tokens, is_spotify_authenticated
 
 class AuthURL(APIView):
     def get(self, request, format= None):
@@ -61,7 +56,6 @@ class IsAuthenticated(APIView):
         return Response({'status': is_authenticated}, status = status.HTTP_200_OK)
 
 def index(request):
-    context = RequestContext(request)
     context_dict = {}
     guitars = Guitar.objects.order_by('salesPrice')[:3]
 
@@ -117,3 +111,36 @@ def song(request):
 
     return render(request, 'guitar/song.html')
 
+def get_token(request):
+
+    if request.method == 'GET':
+        access_token = SpotifyToken.objects.get(user = request.session.session_key).access_token
+        
+    #     response = requests.get(
+    #     'https://api.spotify.com/v1/tracks/11dFghVXANMlKmJXsNCbNl?market=ES',
+    #     headers = {
+    #         "Authorization": f"Bearer {access_token}"
+    #     }
+    # )
+        json_resp = get_Song(request, "11dFghVXANMlKmJXsNCbNl")
+
+    return JsonResponse({'access_token': access_token}, status = 200)
+
+def get_Song(request, song):
+    access_token = SpotifyToken.objects.get(user = request.session.session_key).access_token
+    songURL = 'https://api.spotify.com/v1/tracks/' + song + '?market=ES'
+    response = requests.get(
+    songURL,
+    headers = {
+        "Authorization": f"Bearer {access_token}"
+    })
+    track = response.json()
+
+    artistName = track['artists'][0]['name']
+    songName = track['name']
+    albumCover = track['album']['images'][2]['url']
+
+    print(songName)
+    print(albumCover)
+
+    return track

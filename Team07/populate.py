@@ -2,6 +2,7 @@ from mimetypes import guess_type
 import os
 import django
 import requests
+import re
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE',
                         'Team07.settings')
@@ -38,7 +39,7 @@ def populate():
 
     for song in songs:
         s = GuitarsWithSong.objects.get_or_create(skU_ID=Guitar.objects.get(skU_ID=song["skU_ID"]))[0]
-        s.spotifyId = song["spotifyId"]
+        s.spotifyId = re.sub(re.compile('\?.*$'), '', song["spotifyId"])
         s.youtubeUrl = song["youtubeUrl"]
         s.save()
 
