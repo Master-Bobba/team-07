@@ -1,17 +1,19 @@
 from mimetypes import guess_type
 import os
-os.environ.setdefault('DJANGO_SETTINGS_MODULE',
-                        'Team07.settings')
 import django
-django.setup()
-from guitar.models import Guitar, GuitarsWithSong
 import requests
 
+os.environ.setdefault('DJANGO_SETTINGS_MODULE',
+                        'Team07.settings')
+django.setup()
+
+from guitar.models import Guitar, GuitarsWithSong
+
 def populate():
-    response = requests.get("https://services.guitarguitar.co.uk/WebService/api/hackathon/guitars")
+    guitar_response = requests.get("https://services.guitarguitar.co.uk/WebService/api/hackathon/guitars")
+    #songs_response = requests.get("https://services.guitarguitar.co.uk/WebService/api/hackathon/guitarswithsongs")
     
-    for guitar in response.json():
-        print(type(guitar), "\n\n")
+    for guitar in guitar_response.json():
         g = Guitar.objects.get_or_create(skU_ID = guitar["skU_ID"])[0]
         #for key,value in guitar.Items():
         g.asn = guitar["asn"]
@@ -32,6 +34,10 @@ def populate():
         g.createOn = guitar["createOn"]
         g.imageUrls = guitar["imageUrls"]
         g.save()
+
+    #for songs in songs_response.json():
+
+
 
 
 if __name__=='__main__':
