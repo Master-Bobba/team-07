@@ -23,7 +23,4 @@ document.addEventListener('DOMContentLoaded', function(){
         access_token = data.access_token;
         //console.log(access_token);
     });
-
-
-
 });

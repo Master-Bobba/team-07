@@ -15,9 +15,6 @@ class SpotifyToken(models.Model):
     expires_in = models.DateTimeField()
     token_type = models.CharField(max_length = 50, default='')
 
-    def __str__(self):
-        return self.name
-
 
 class Guitar(models.Model):
     skU_ID = models.CharField(max_length=64, unique = True, primary_key = True)
@@ -39,14 +36,8 @@ class Guitar(models.Model):
     createdOn = models.DateTimeField(null=True)
     imageUrls = models.URLField(null=True)
 
-    def __str__(self):
-        return self.name
-
-
 class GuitarsWithSong(models.Model):
     skU_ID = models.ForeignKey(Guitar, on_delete=models.CASCADE, primary_key=True)
     spotifyId = models.CharField(max_length = 128)
     youtubeUrl = models.URLField()
 
-    def __str__(self):
-        return self.name
