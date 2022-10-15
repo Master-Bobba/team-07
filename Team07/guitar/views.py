@@ -1,11 +1,12 @@
 from http.client import HTTPResponse
-from django.shortcuts import render
+import re
+from urllib import response
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import RequestContext
 from .models import Guitar
 import random
 
-# Create your views here.
 def index(request):
     context = RequestContext(request)
     context_dict = {}
