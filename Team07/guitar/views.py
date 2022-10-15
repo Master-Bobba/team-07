@@ -15,4 +15,34 @@ def index(request):
     context_dict['guitars'] = guitars
 
 
-    return render(request, 'guitar/index.html')
+    return render(request, 'guitar/index.html', context=context_dict)
+
+def brand(request):
+    context = RequestContext(request)
+
+    return render(request, 'guitar/brand.html')
+
+def brands(request):
+    context = RequestContext(request)
+
+    return render(request, 'guitar/brands.html')
+
+def category(request):
+    context = RequestContext(request)
+
+    return render(request, 'guitar/category.html')
+
+def categories(request):
+    context = RequestContext(request)
+
+    return render(request, 'guitar/categories.html')
+
+def guitar(request):
+    context = RequestContext(request)
+
+    return render(request, 'guitar/guitar.html')
+
+def song(request):
+    context = RequestContext(request)
+
+    return render(request, 'guitar/song.html')

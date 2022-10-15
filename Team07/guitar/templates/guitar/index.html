@@ -13,10 +13,10 @@
     <div id="Container">
         <h2>Guitars of the day!!</h2>
         <div id="carousel"> 
-            {% if guitars %}
-                {% for guitar in guitars %}
+            {% if guitar %}
+                {% for g in guitar %}
                     <div id="carousel-item"> 
-                        <p>{{ guitar.title }}</p>
+                        <p>{{ g.title }}</p>
                     </div>
                 {% endfor %}
             {% else %}
