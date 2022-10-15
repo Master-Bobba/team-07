@@ -117,3 +117,36 @@ def song(request):
 
     return render(request, 'guitar/song.html')
 
+def get_token(request):
+
+    if request.method == 'GET':
+        access_token = SpotifyToken.objects.get(user = request.session.session_key).access_token
+        
+    #     response = requests.get(
+    #     'https://api.spotify.com/v1/tracks/11dFghVXANMlKmJXsNCbNl?market=ES',
+    #     headers = {
+    #         "Authorization": f"Bearer {access_token}"
+    #     }
+    # )
+        json_resp = get_Song(request, "11dFghVXANMlKmJXsNCbNl")
+
+    return JsonResponse({'access_token': access_token}, status = 200)
+
+def get_Song(request, song):
+    access_token = SpotifyToken.objects.get(user = request.session.session_key).access_token
+    songURL = 'https://api.spotify.com/v1/tracks/' + song + '?market=ES'
+    response = requests.get(
+    songURL,
+    headers = {
+        "Authorization": f"Bearer {access_token}"
+    })
+    track = response.json()
+
+    artistName = track['artists'][0]['name']
+    songName = track['name']
+    albumCover = track['album']['images'][2]['url']
+
+    print(songName)
+    print(albumCover)
+
+    return track
