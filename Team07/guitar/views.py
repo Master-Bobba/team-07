@@ -3,6 +3,10 @@ import re
 from urllib import response
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.http import JsonResponse 
+import requests
+
+from guitar.models import SpotifyToken
 
 from .credentials import CLIENT_ID, CLIENT_SECRET, REDIRECT_URI
 from rest_framework.views import APIView
@@ -15,13 +19,13 @@ class AuthURL(APIView):
     def get(self, request, format= None):
         scopes = 'user-read-playback-state user-modify-playback-state user-read-currently-playing'
 
-        url = Request('GET', 'https://accounts.spotify.com/authorize', parama = {
+        url = Request('GET', 'https://accounts.spotify.com/authorize', params = {
             'scope': scopes,
             'response_type': 'code',
             'redirect_uri': REDIRECT_URI,
             'client_id': CLIENT_ID
         }).prepare().url
-
+        print(url)
         return Response({'url': url}, status = status.HTTP_200_OK)
 
 def spotify_callback(request, format = None):
@@ -47,10 +51,36 @@ def spotify_callback(request, format = None):
 
     update_or_create_user_tokens(request.session.session_key, access_token, token_type, expires_in, refresh_token)
 
-    return redirect('frontend:')
+    return redirect('guitar:index')
+    
 
 class IsAuthenticated(APIView):
     def get(self, request, format=None):
         is_authenticated = is_spotify_authenticated(self.request.session.session_key)
         return Response({'status': is_authenticated}, status = status.HTTP_200_OK)
+
+def index(request):
+    return render(request, "guitar/index.html")
+
+
+def get_token(request):
+
+    if request.method == 'GET':
+        access_token = SpotifyToken.objects.get(user = request.session.session_key).access_token
+        
+        response = requests.get(
+        'https://api.spotify.com/v1/tracks/11dFghVXANMlKmJXsNCbNl?market=ES',
+        headers = {
+            "Authorization": f"Bearer {access_token}"
+        }
+    )
+    json_resp = response.json()
+
+    print(json_resp['album']['artists'][0]['name'])
+
+    return JsonResponse({'access_token': access_token}, status = 200)
+
+
+
+
         
