@@ -1,17 +1,23 @@
+{% load static %}
 <!DOCTYPE html>
 
 <html>
     <head>
         <title>Guitars</title>
-        <script>
-            document.addEventListener('DOMContentLoaded', function(){
-
-                
-            });
-
-        </script>
+        <link rel="stylesheet" href="{% static 'testing.css' %}">
     </head>
     <body>
-        <h1>Hello, World!</h1>
+        <h1>Hello, Guitar!</h1>
+
+        {% block navbar_block %}
+        <ul>
+            <li><a href="">Home</a></li>
+            <li><a href="">Guitars</a></li>
+            <li><a href="">Brands</a></li>
+            <li><a href="">Category</a></li>
+            <li><a href="">Reserved</a></li>
+        </ul>
+        {% endblock %}
+        
     </body>
 </html>

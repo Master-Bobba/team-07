@@ -53,4 +53,7 @@ class IsAuthenticated(APIView):
     def get(self, request, format=None):
         is_authenticated = is_spotify_authenticated(self.request.session.session_key)
         return Response({'status': is_authenticated}, status = status.HTTP_200_OK)
+
+def index(request):
+    return render(request, "guitar/index.html")
         
