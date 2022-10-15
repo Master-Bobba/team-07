@@ -38,6 +38,7 @@ body {
   color: white;
   margin: 0;
   padding: 0;
+  
 }
 
 #header {
@@ -45,3 +46,18 @@ body {
   display: inline;
 }
 
+ul > li {
+  display: inline-block;
+  
+}
+
+#guitarContainer{
+  width:800px;
+  margin:0 auto;
+  text-align: center;
+}
+
+#guitarImage{
+  height:30%;
+  width:10%;
+}

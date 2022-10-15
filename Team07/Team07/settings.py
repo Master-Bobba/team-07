@@ -23,7 +23,7 @@ SETTINGS_DIR = os.path.dirname(__file__)
 # SECURITY WARNING: keep the secret key used in production secret!
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'Templates')
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 #STATICFILES_DIRS = [STATIC_DIR, ]
 
