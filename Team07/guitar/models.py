@@ -41,7 +41,7 @@ class Guitar(models.Model):
 
 
 class GuitarsWithSong(models.Model):
-    skU_ID = models.ForeignKey(Guitar, on_delete=models.CASCADE)
+    skU_ID = models.ForeignKey(Guitar, on_delete=models.CASCADE, primary_key=True)
     spotifyId = models.CharField(max_length = 128)
     youtubeUrl = models.URLField()
 
