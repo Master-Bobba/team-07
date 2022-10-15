@@ -12,10 +12,10 @@
 
     <div id="Container">
         <h2>Guitars of the day!!</h2>
-        <div id="carousel"> 
+        <div id="carousel">
             {% if guitar %}
                 {% for g in guitar %}
-                    <div id="carousel-item"> 
+                    <div id="carousel-item">
                         <p>{{ g.title }}</p>
                     </div>
                 {% endfor %}
@@ -28,3 +28,7 @@
     {% endblock %}
 
 </html>
+
+{% block script %}
+      <script src="{% static 'guitar/index.js' %}"></script>
+{% endblock %}
