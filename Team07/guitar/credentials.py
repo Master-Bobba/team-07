@@ -1,4 +1,4 @@
 CLIENT_ID = "5e7b4948be7441b69d02ba8bc188015f"
 CLIENT_SECRET = "80020fa48fac46a9beaf48ba54ceaf29"
-REDIRECT_URI = ""
+REDIRECT_URI = "http://127.0.0.1:8000/guitar/redirect"
 

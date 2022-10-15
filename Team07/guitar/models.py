@@ -1,16 +1,19 @@
+from enum import unique
+from tkinter import CASCADE
 from django.db import models
+from django.contrib.auth.models import User
 from django.utils import timezone
 
 # Create your models here.
 
 
 class SpotifyToken(models.Model):
-    user = models.CharField(max_length = 50, unique = True)
+    user = models.CharField(max_length= 50, unique=True, default='')
     created_at = models.DateTimeField(auto_now_add = True)
-    refresh_token = models.CharField(max_length = 150)
-    aceess_token = models.CharField(max_length = 150)
+    refresh_token = models.CharField(max_length = 150, default='')
+    access_token = models.CharField(max_length = 150, default='')
     expires_in = models.DateTimeField()
-    token_type = models.CharField(max_length = 50)
+    token_type = models.CharField(max_length = 50, default='')
 
     def __str__(self):
         return self.name

@@ -44,6 +44,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "guitar",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
