@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function(){
     fetch('is-authenticated')
     .then((response) => response.json())
     .then((data) => {
-        console.log(data.status);
+        //console.log(data.status);
         if (!data.status){
             //authenticate
             fetch('get-auth-url')
@@ -19,9 +19,9 @@ document.addEventListener('DOMContentLoaded', function(){
     fetch('getToken')
     .then(response => response.json())
     .then((data) => {
-        console.log("My Token is:")
+        //console.log("My Token is:")
         access_token = data.access_token;
-        console.log(access_token);
+        //console.log(access_token);
     });
 
 
