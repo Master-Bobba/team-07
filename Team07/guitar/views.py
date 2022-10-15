@@ -1,20 +1,15 @@
-from http.client import HTTPResponse
-import re
-from urllib import response
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from django.http import JsonResponse
 import requests
 from .models import SpotifyToken, Guitar
 from django.template import RequestContext
-import random
 
 from .credentials import CLIENT_ID, CLIENT_SECRET, REDIRECT_URI
 from rest_framework.views import APIView
 from requests import Request, post
 from rest_framework import status
 from rest_framework.response import Response
-from .util import is_spotify_authenticated, update_or_create_user_tokens, is_spotify_authenticated
+from .util import update_or_create_user_tokens, is_spotify_authenticated
 
 class AuthURL(APIView):
     def get(self, request, format= None):
@@ -61,7 +56,6 @@ class IsAuthenticated(APIView):
         return Response({'status': is_authenticated}, status = status.HTTP_200_OK)
 
 def index(request):
-    context = RequestContext(request)
     context_dict = {}
     guitars = Guitar.objects.order_by('salesPrice')[:3]
 

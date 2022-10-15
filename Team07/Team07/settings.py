@@ -14,8 +14,7 @@ from pathlib import Path
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-SETTINGS_DIR = os.path.dirname(__file__)
+SETTINGS_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -23,11 +22,11 @@ SETTINGS_DIR = os.path.dirname(__file__)
 # SECURITY WARNING: keep the secret key used in production secret!
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
-STATIC_DIR = os.path.join(BASE_DIR, 'static')
-#STATICFILES_DIRS = [STATIC_DIR, ]
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'guitar/Templates')
+STATIC_DIR = os.path.join(BASE_DIR, 'guitar/static')
+STATICFILES_DIRS = [STATIC_DIR, ]
 
-MEDIA_DIR = os.path.join(BASE_DIR, 'media')
+MEDIA_DIR = os.path.join(BASE_DIR, 'guitar/media')
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
 
@@ -72,7 +71,7 @@ ROOT_URLCONF = "Team07.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [TEMPLATE_DIR, ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -127,7 +126,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
