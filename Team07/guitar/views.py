@@ -9,7 +9,7 @@ import random
 def index(request):
     context = RequestContext(request)
     context_dict = {}
-    guitars = Guitar.objects.order_by('id')[:3]
+    guitars = Guitar.objects.order_by('salesPrice')[:3]
     
     context_dict['guitars'] = guitars
 
