@@ -3,6 +3,8 @@ import re
 from urllib import response
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.template import RequestContext
+from django.shortcuts import render_to_response
 
 from .credentials import CLIENT_ID, CLIENT_SECRET, REDIRECT_URI
 from rest_framework.views import APIView
@@ -55,5 +57,5 @@ class IsAuthenticated(APIView):
         return Response({'status': is_authenticated}, status = status.HTTP_200_OK)
 
 def index(request):
-    return render(request, "guitar/index.html")
-        
+    context = RequestContext(request)
+    return render(request, 'guitar/index.html')
