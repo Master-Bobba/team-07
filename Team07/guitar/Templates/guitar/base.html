@@ -3,6 +3,16 @@
 
 <html>
     <head lang="en">
+        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js%22%3E"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <body onload="get_authenticated()">
+        <script src="{% static 'guitar/index.js' %}"></script>
+    </body>
+    
+    {% block script %}
+
+    {% endblock %}
+
         <meta charset="UTF-8" />
 
         <link rel="stylesheet" href="{% static 'style.css' %}">
@@ -11,6 +21,7 @@
             {% block title_block %}
                 🎸GuitarGuitar🎸
             {% endblock %}
+            
         </title>
 
         <div class="header">
@@ -22,8 +33,8 @@
                 {% block navbar_block %}
                     <ul id="navbar">
                         <li><a href="/guitar">Home</a></li>
-                        <li><a href="/guitar/brands">Brands</a></li>
-                        <li><a href="/guitar/categories">Categories</a></li>
+                        <li><a href="{% url 'guitar:brandZZ' %}">Brands</a></li>
+                        <li><a href="{% url 'guitar:categorieZZ' %}">Categories</a></li>
                     </ul>
                 {% endblock %}
             </div>   
@@ -34,6 +45,7 @@
     <body>
         <div>
             {% block body_block %}
+            
             {% endblock %}
         </div>
        

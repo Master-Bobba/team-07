@@ -2,32 +2,52 @@
 <!DOCTYPE html>
 {% extends 'guitar/base.html' %}
 {% load static %}
-<html>
 
-    {% block header_block %}
-        <h1 id="header">Welcome to 🎸GuitarGuitar🎸</h1>
-    {% endblock %}
+{% block header_block %}
+    <h1 id="header">Welcome to 🎸GuitarGuitar🎸</h1>
+    <style>
+        .column {
+            float: left;
+            width: 30%;
+            padding-left: 3%;
+        }
 
-    {% block body_block %}
+/* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
+{% endblock %}
+
+{% block body_block %}
 
     <div id="Container">
         <h2>Guitars of the day!!</h2>
         <div id="carousel">
-            {% if guitar %}
-                {% for g in guitar %}
-                    <div id="carousel-item">
-                        <p>{{ g.title }}</p>
-                    </div>
+            {% if guitars %}
+            <div class="row">
+                {% for guitar in guitars %}
+                    <a href="/guitar/guitar/{{ guitar.skU_ID }}" style = "text-decoration: none; color: black;">
+                        <div class="column">
+                            <div id="carousel-item">
+                                <p>{{ guitar.itemName }}</p>    
+                                <img src="{{ guitar.pictureMain }}" width=100 height=200>
+                            </div>
+                        
+                        </div>
+                    </a>
                 {% endfor %}
+            </div>
             {% else %}
                 <strong>There are no guitars present</strong>
             {% endif %}
         </div>
+    </div>
 
+{% endblock %}
 
-    {% endblock %}
-
-</html>
 
 {% block script %}
       <script src="{% static 'guitar/index.js' %}"></script>

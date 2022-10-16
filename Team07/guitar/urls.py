@@ -9,11 +9,12 @@ urlpatterns = [
     path('redirect', spotify_callback),
     path('is-authenticated', IsAuthenticated.as_view()),
     path('', views.index, name="index"),
-    path('brand', views.brand, name='brand'),
-    path('brands', views.brands, name='brands'),
-    path('category', views.category, name='category'),
-    path('categories', views.categories, name='categories'),
-    path('guitar', views.guitar, name='guitar'),
+    path("<str:category_id>", views.category, name="category"),
+    path('brand/<str:brand_id>', views.brand, name='brand'),
+    path("brands/", views.brands, name="brandZZ"),
+    #path('category', views.category, name='category'),
+    path('categories/', views.categories, name="categorieZZ"),
+    path('guitar/<str:guitar_id>', views.guitar, name='guitar'),
     path('song', views.song, name='song'),
 
 

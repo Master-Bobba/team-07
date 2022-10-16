@@ -2,14 +2,39 @@
 {% extends 'guitar/base.html' %}
 {% load static %}
 <html>
-
+    
     {% block header_block %}
-        <h1 id="header">🎸{{% Guitar.itemName %}}🎸</h1>
+        <h1 id="header">🎸{{ guitar.itemName }}🎸</h1>
+        <body onload="get_authenticated()">
+            <script src="{% static 'guitar/index.js' %}"></script>
+        </body>
     {% endblock %}
 
     {% block body_block %}
-
-
+        <h1>{{guitar.itemName}} - Price: £{{guitar.salesPrice}}0</h1>
+        <div class="guitar-image"> 
+            <img id="guitarImage" src="{{ guitar.pictureMain }}" alt="post-picture" width= 100 height = 200/>
+            {{guitar.productDetail}}
+            {% if guitar.qtyInStock > 0 %}
+                <h5 style="color: green;">In Stock</h5>
+            {% else %}
+                <h5 style="color: red;">Out of stock</h5>
+            {% endif %}
+        </div>
+        {% if spotify %}
+            <div>
+                <h2> You might have heard it on Spotify? </h2>
+                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/{{ spotify.songId }}?utm_source=generator&theme=0" width="30%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy">
+                </iframe>
+            </div>
+            <div>
+                <h2> or perhaps Yourtube? </h2>
+                <iframe width="560" height="315" src="{{ music_links }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                </iframe>
+            </div>
+        {% endif %}
     {% endblock %}
-
 </html>
+{% block script %}
+      <script src="{% static 'guitar/index.js' %}"></script>
+{% endblock %}
